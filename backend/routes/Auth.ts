@@ -27,7 +27,7 @@ const routes: RouteConfig[] = [
     method: 'post',
     path: '/login',
     handler: Login,
-  }
+  },
   {
     method: 'post',
     path: '/register',
