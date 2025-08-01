@@ -1,5 +1,5 @@
-import type { Types } from "mongoose";
-import jwt from "jsonwebtoken";
+import type { Types } from "mongoose"
+import jwt from "jsonwebtoken"
 
 type GenerateTokenPayload = {
   _id: Types.ObjectId
