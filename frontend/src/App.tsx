@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-// import AppRouter from './routes/AppRouter'
+import AppRouter from './routes/AppRouter'
 
 const App: React.FC = () => {
   return (
     <>
-      {/* <AppRouter />  */}
+      <AppRouter /> 
     </>
   )
 }
