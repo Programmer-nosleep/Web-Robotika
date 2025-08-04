@@ -1,35 +1,47 @@
-import express, { type Application } from 'express'
-import path from 'path'
-import cors from 'cors'
-import conn from './config/db'
+import express, { type Application } from 'express';
+import path from 'path';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import conn from './config/db';
 
-import AuthRouter from './routes/AuthRoutes'
+import AuthRouter from './routes/AuthRoutes';
 
-const app: Application = express()
+dotenv.config();
 
+const app: Application = express();
+
+// Middleware
 app.use(
   cors({
     origin: process.env.CLIENT_URL || '*',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
-)
+);
+app.use(express.json());
 
-app.use(express.json())
+// Static files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-conn()
+// Routes
+const routes: [string, express.Router][] = [['/api/auth', AuthRouter]];
+routes.forEach(([routePath, handler]) => {
+  app.use(routePath, handler);
+});
 
-const routes: [string, express.Router][] = [
-  ['/api/auth', AuthRouter],
-]
+// Start server only after DB connected
+const PORT = process.env.PORT || 8080;
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+async function startServer() {
+  try {
+    await conn();
+    app.listen(PORT, () => {
+      console.log(`✅ Server is running at http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error('❌ Failed to connect to the database:', error);
+    process.exit(1);
+  }
+}
 
-routes.forEach(([path, handler]) => {
-  app.use(path, handler)
-})
-
-const PORT = process.env.PORT || 8080
-app.listen(PORT, () => {
-  console.log(`Server is running on url: http://localhost:${PORT}`)
-})
+startServer();
