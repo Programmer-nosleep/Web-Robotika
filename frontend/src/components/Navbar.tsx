@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"; // jika menggunakan React Router
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false)
 
+  const robotLogo = import.meta.env.VITE_LOGO_URL || "/assets/robot.png"
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10)
@@ -15,7 +17,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed w-full z-50 px-8 py-4 flex justify-between items-center transition-all duration-300 ${
+      className={`fixed w-full px-8 py-4.5 flex justify-between items-center transition-all duration-300 ${
         scrolled
           ? "bg-white/80 shadow-md backdrop-blur-sm"
           : "bg-transparent"
@@ -23,13 +25,13 @@ const Navbar: React.FC = () => {
     >
       {/* Logo atau Judul */}
       <div className="text-xl font-bold text-blue-700">
-        <div className="flex items-center space-x-4.5">
+        <div className="flex items-center space-x-2.5">
           <img
-            src="C:\\Users\\Neovecpp\\SideProject\\Project\\web-robotika\\Dashboard\\frontend\\src\\assets\\robot.png"
+            src={robotLogo}
             alt="Logo"
-            className="h-8"
+            className="absolute left-2.5 h-15 w-auto"
             />
-        <Link to="/">Robotics Community</Link>
+        <Link to="/" className="mx-11">Robotics Community</Link>
         </div>
       </div>
 
