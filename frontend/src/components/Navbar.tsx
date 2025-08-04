@@ -1,13 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // jika menggunakan React Router
 
 const Navbar: React.FC = () => {
-  const [] = useState()
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
   return (
-    <nav className="w-full px-8 py-4 border-b border-gray-400/50 bg-gray-100 shadow-md flex justify-between items-center">
+    <nav
+      className={`fixed w-full z-50 px-8 py-4 flex justify-between items-center transition-all duration-300 ${
+        scrolled
+          ? "bg-white/80 shadow-md backdrop-blur-sm"
+          : "bg-transparent"
+      }`}
+    >
       {/* Logo atau Judul */}
       <div className="text-xl font-bold text-blue-700">
+        <div className="flex items-center space-x-4.5">
+          <img
+            src="C:\\Users\\Neovecpp\\SideProject\\Project\\web-robotika\\Dashboard\\frontend\\src\\assets\\robot.png"
+            alt="Logo"
+            className="h-8"
+            />
         <Link to="/">Robotics Community</Link>
+        </div>
       </div>
 
       {/* Menu Navigasi */}

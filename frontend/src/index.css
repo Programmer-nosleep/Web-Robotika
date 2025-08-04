@@ -5,8 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-display: 'Geist', sans-serif;
+  --font-display: "Poppins", sans-serif;
   --breakpoint-3xl: 1920px;
+  --color-primary: #1368ec
 }
 
 @theme inline {
@@ -48,6 +49,10 @@
 }
 
 :root {
+  font-family: "Geist", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);

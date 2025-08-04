@@ -20,7 +20,6 @@ interface UserContextType {
   clearUser: () => void
 }
 
-
 interface UserProviderProps {
   children: ReactNode
 }
